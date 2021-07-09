@@ -1,0 +1,52 @@
+import os
+import csv
+
+budget_data = os.path.join('Resources', 'budget_data.csv')
+row_count = 0
+total_sum = 0
+total_change = 0
+largest_increase = 0
+largest_decrease = 0
+last_month_val = 0
+greatest_increase_month
+greatest_decrease_month
+
+with open(budget_data) as csvfile:
+    budget_csv = csv.reader(csvfile, delimiter = ',')
+    
+    first_row=next(budget_csv)
+
+    for row in budget_csv:
+        
+        if row_count != 0:
+            total_change = total_change + int(row[1]) - last_month_val
+        row_count+=1
+        monthly_change= int(row[1]) - last_month_val
+        last_month_val= int(row[1])
+        largest_increase = max(largest_increase, monthly_change)
+        
+        largest_decrease = min(largest_decrease, monthly_change)
+       
+        total_sum+=int(row[1])        
+     
+        
+    print("Finacial Analysis")
+    print("--------------------------------")
+    print(f'Total Months: {row_count}')
+    print(f'Total: ${total_sum}')
+    print(f'Average Change: ${round((total_change/(row_count-1)), 2)}')
+    print(f'Greatest Increase in Profits: \n  ${largest_increase}')
+    print(f'Greatest Decrease in Profits: \n  ${largest_decrease}') 
+
+
+
+
+        csvwriter = csv.writer(csvfile, delimiter=":")
+    csvwriter.writerow(["Finacial Analysis"])
+    csvwriter.writerow(["--------------------------------"])
+    csvwriter.writerow([f'Total Months: {row_count}'])
+    csvwriter.writerow([f'Total: ${total_sum}'])
+    csvwriter.writerow([f'Average Change: ${round((total_change/(row_count-1)), 2)}'])
+    csvwriter.writerow([f'Greatest Increase in Profits: \n {greatest_increase_month} (${greatest_increase_difference})'])
+    csvwriter.writerow([f'Greatest Decrease in Profits: \n {greatest_decrease_month} (${greatest_decrease_difference})'])
+    
